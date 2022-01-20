@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import ErrorAlert from './ErrorAlert';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const GoalForm = ({currentUser, updateGoals }) => {
+const GoalForm = ({currentUser, updateUserInfo }) => {
 
   let { goalId } = useParams()
   let navigate = useNavigate()
@@ -36,7 +36,12 @@ const GoalForm = ({currentUser, updateGoals }) => {
     .then(res => {
       if(res.ok){
         res.json()
-        .then(goal => updateGoals(goal, goalId))
+        .then(fetch("/me").then((r) => {
+          if (r.ok) {
+            r.json().then((user) => updateUserInfo(user));
+          }
+        }))
+        .then(navigate('/'));
       }else{
         res.json().then(e => setErrors(e))
       }
@@ -52,7 +57,11 @@ const GoalForm = ({currentUser, updateGoals }) => {
     .then(res => {
       if(res.ok){
         res.json()
-        .then(goal => updateGoals(goal))
+        .then(fetch("/me").then((r) => {
+          if (r.ok) {
+            r.json().then((user) => updateUserInfo(user));
+          }
+        }))
         .then(navigate('/'));
       }else{
         res.json().then(e => setErrors(e))

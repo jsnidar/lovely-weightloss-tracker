@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_132052) do
     t.float "hips"
     t.float "chest"
     t.date "date"
+    t.string "notes"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

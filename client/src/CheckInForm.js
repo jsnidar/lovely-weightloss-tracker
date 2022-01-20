@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import ErrorAlert from './ErrorAlert';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const CheckInForm = ({updateCheckIns}) => {
+const CheckInForm = ({updateUserInfo}) => {
 
   let { checkInId } = useParams()
   let navigate = useNavigate()
@@ -66,7 +66,11 @@ const CheckInForm = ({updateCheckIns}) => {
     .then(res => {
       if(res.ok){
         res.json()
-        .then(checkIn => updateCheckIns(checkIn, checkInId))
+        .then(fetch("/me").then((r) => {
+          if (r.ok) {
+            r.json().then((user) => updateUserInfo(user));
+          }
+        }))
         .then(navigate('/'));
       }else{
         res.json().then(e => setErrors(e))
@@ -83,7 +87,11 @@ const CheckInForm = ({updateCheckIns}) => {
     .then(res => {
       if(res.ok){
         res.json()
-        .then(checkIn => updateCheckIns(checkIn))
+        .then(fetch("/me").then((r) => {
+          if (r.ok) {
+            r.json().then((user) => updateUserInfo(user));
+          }
+        }))
         .then(navigate('/'));
       }else{
         res.json().then(e => setErrors(e))

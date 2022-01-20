@@ -51,3 +51,5 @@ end
 gem "active_model_serializers", "~> 0.10.12"
 
 gem 'bootstrap', '~> 5.1.3'
+
+gem 'validates_timeliness', '~> 6.0.0.beta2'

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Button } from "react-bootstrap";
-import CheckInCard from "./Components/CheckInCard";
+import CheckInCard from "./CheckInCard";
 import { useState } from 'react';
 
 const CheckInsContainer = ({ dateWithoutTime, currentUser, deleteCheckIn }) => {

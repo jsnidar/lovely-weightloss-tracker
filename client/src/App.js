@@ -10,27 +10,32 @@ import { Route, Routes, useNavigate } from "react-router-dom"
 function App() {
 
   const [currentUser, setCurrentUser] = useState(null)
+  const [selectedGoal, setSelectedGoal] = useState(null)
+    
   let navigate = useNavigate()
 
+  const selectGoal = (goal) => setSelectedGoal(goal)
+  
   useEffect(() => {
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => setCurrentUser(user));
+        r.json().then((user) => {
+          setCurrentUser(user)
+          setSelectedGoal(user.goals[user.goals.length -1]
+        )
+        });
       }
     });
   }, []);
   console.log(currentUser)
+  console.log(selectedGoal)
+
   if (!currentUser) return <LogIn setCurrentUser={setCurrentUser} />;
 
-  const updateGoals = (goal, goalId) => {
-    const updatedUserInfo = {...currentUser}
-    goalId ? updatedUserInfo.goals = updatedUserInfo.goals.map(priorGoal => {
-      if (parseInt(priorGoal.id) === parseInt(goalId, 10)) {
-          return goal 
-      }else{
-          return priorGoal
-      }}) : updatedUserInfo.goals.push(goal)
+  const updateUserInfo = (updatedUserInfo) => {
     setCurrentUser(updatedUserInfo)
+    const updatedGoalInfo = updatedUserInfo.goals.find( goal => goal.id === selectedGoal.id)
+    setSelectedGoal(updatedGoalInfo)
     navigate('/')
   }
 
@@ -38,18 +43,6 @@ function App() {
     const updatedUserInfo = {...currentUser}
     updatedUserInfo.goals = currentUser.goals.filter(goal => goal.id !== deletedGoal.id)
     setCurrentUser(updatedUserInfo)
-  }
-
-  const updateCheckIns = (checkIn, checkInId) => {
-    const updatedUserInfo = {...currentUser}
-    checkInId ? updatedUserInfo.check_ins = updatedUserInfo.check_ins.map(check_in => {
-      if (check_in.id === parseInt(checkInId)) {
-          return checkIn 
-      }else{
-          return check_in
-      }}) : updatedUserInfo.check_ins.push(checkIn)
-    setCurrentUser(updatedUserInfo)
-    navigate('/')
   }
     
   const deleteCheckIn = (deletedCheckIn) => {
@@ -82,20 +75,22 @@ function App() {
               deleteCheckIn={deleteCheckIn}
               deleteGoal={deleteGoal}
               currentUser={currentUser}
-              dateWithoutTime={dateWithoutTime} 
+              dateWithoutTime={dateWithoutTime}
+              selectedGoal={selectedGoal}
+              selectGoal={selectGoal}
             />
           } 
         />
           <Route
             path='/check-ins/new'
             element={
-              <CheckInForm updateCheckIns={updateCheckIns} />
+              <CheckInForm updateUserInfo={updateUserInfo} />
             } 
           />
           <Route
             path='/check-ins/:checkInId/edit'
             element={
-              <CheckInForm updateCheckIns={updateCheckIns} />
+              <CheckInForm updateUserInfo={updateUserInfo} />
             } 
           />
           <Route
@@ -103,7 +98,7 @@ function App() {
             element={
               <GoalForm 
                 currentUser={currentUser} 
-                updateGoals={updateGoals} 
+                updateUserInfo={updateUserInfo} 
               />
             }
           />
@@ -112,7 +107,7 @@ function App() {
             element={
               <GoalForm 
                 currentUser={currentUser} 
-                updateGoals={updateGoals}
+                updateUserInfo={updateUserInfo}
               />
             } 
           />

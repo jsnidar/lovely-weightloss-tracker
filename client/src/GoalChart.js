@@ -85,14 +85,14 @@ const GoalChart = ({dateWithoutTime, selectedGoal, currentUser}) => {
   };
 
   return(
-    <Container className='border'>
+    selectedGoal ? <Container className='border'>
       <Line
         options={options}
         data={data}
         style={{vh:50}}
         datasetIdKey="id"
       />
-    </Container>
+    </Container> : null
   )
 }
 
