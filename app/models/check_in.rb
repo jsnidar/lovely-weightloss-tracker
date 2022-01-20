@@ -1,3 +1,6 @@
 class CheckIn < ApplicationRecord
-  belongs_to :user_id
+  validates :weight, presence: true, numericality: { greater_than: 0 }
+  validates_date :date, on_or_before: lambda { Date.current }
+
+  belongs_to :user
 end
