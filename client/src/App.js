@@ -27,8 +27,6 @@ function App() {
       }
     });
   }, []);
-  console.log(currentUser)
-  console.log(selectedGoal)
 
   if (!currentUser) return <LogIn setCurrentUser={setCurrentUser} />;
 

@@ -7,4 +7,9 @@ class User < ApplicationRecord
 
   has_many :check_ins
   has_many :goals 
+
+  def self.most_goals
+    all.max { |a, b| a.goals.length <=> b.goals.length }
+    all.max_by { |a| a.goals.length }
+  end
 end

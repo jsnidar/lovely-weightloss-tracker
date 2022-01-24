@@ -8,7 +8,7 @@ class Goal < ApplicationRecord
   belongs_to :user
 
   def goal_check_ins
-    goal_check_ins = self.user.check_ins.where(date: self.goal_start_date..self.goal_end_date)
+    self.user.check_ins.where(date: self.goal_start_date..self.goal_end_date)
   end
   
 end
