@@ -1,6 +1,6 @@
 import { Container, Row, Image } from 'react-bootstrap';
-import GoalsContainer from "./GoalsContainer";
-import CheckInsContainer from './CheckInsContainer';
+import GoalsContainer from "./goals/GoalsContainer";
+import CheckInsContainer from './check-ins/CheckInsContainer';
 
 const Home = ({ selectGoal, dateWithoutTime, currentUser, deleteCheckIn, deleteGoal, selectedGoal}) => {
 

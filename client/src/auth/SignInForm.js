@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import ErrorAlert from './ErrorAlert';
+import ErrorAlert from '../errors/ErrorAlert';
 
 const SignInForm = ({ setCurrentUser }) => {
 

@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import GoalChart from "./GoalChart";
 import GoalCard from "./GoalCard";
 
-const GoalsContainer = ({ selectGoal, selectedGoal, dateWithoutTime, currentUser, deleteGoal, }) => {
-  
+const GoalsContainer = ({ selectGoal, selectedGoal, dateWithoutTime, currentUser, deleteGoal }) => {
   
   const [showGoals, setShowGoals] = useState(false)
   let navigate = useNavigate()

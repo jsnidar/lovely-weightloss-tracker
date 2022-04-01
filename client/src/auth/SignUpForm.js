@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
-import ErrorAlert from './ErrorAlert';
+import ErrorAlert from '../errors/ErrorAlert';
 import { useNavigate } from 'react-router-dom';
 
 const SignUpForm = ({ setCurrentUser }) => {
@@ -49,7 +49,6 @@ const SignUpForm = ({ setCurrentUser }) => {
 
   return (
     <div>
-      {/* <NavBar /> */}
       <Container>
         <br></br>
         <Form>

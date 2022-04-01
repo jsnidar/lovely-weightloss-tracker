@@ -1,6 +1,6 @@
 import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import ErrorAlert from './ErrorAlert';
+import ErrorAlert from '../errors/ErrorAlert';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const GoalForm = ({currentUser, updateUserInfo }) => {

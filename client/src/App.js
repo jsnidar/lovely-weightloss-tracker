@@ -1,9 +1,9 @@
 import './App.css';
-import NavBar from './NavBar';
+import NavBar from './navigation/NavBar';
 import Home from './Home';
-import LogIn from './LogIn';
-import CheckInForm from './CheckInForm';
-import GoalForm from './GoalForm';
+import LogIn from './auth/LogIn';
+import CheckInForm from './check-ins/CheckInForm';
+import GoalForm from './goals/GoalForm';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from "react-router-dom"
 
